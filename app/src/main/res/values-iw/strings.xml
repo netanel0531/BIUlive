@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">BIUlive</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="schedule">מערכת שעות</string>
+    <string name="map">מפה</string>
+    <string name="messages">הודעות</string>
+    <string name="library">ספריה</string>
+    <string name="grades">ציונים</string>
+    <string name="personal">אזור אישי</string>
+    <string name="settings">הגדרות</string>
+    <string name="feedback">Feedback</string>
+    <string name="contacts">אנשי קשר</string>
+    <string name="facebook">Facebook</string>
+    <string name="tests">לוח מבחנים</string>
+</resources>
