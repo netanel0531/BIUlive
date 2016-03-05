@@ -16,5 +16,10 @@
     <string name="title_activity_map">Map</string>
     <string name="title_activity_grades">GradesActivity</string>
     <string name="title_activity_facebook">FacebookActivity</string>
+    <string name="title_activity_tests">TestsActivity</string>
+    <string name="title_activity_schedule">ScheduleActivity</string>
+    <string name="title_activity_library">LibraryActivity</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_messages">MessagesActivity</string>
 
 </resources>

@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
         map_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, MapActivity.class);
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
             }
         });
@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
         personal_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, PersonalActivity.class);
+                Intent intent = new Intent(MainActivity.this, PersonalActivity.class);
                 startActivity(intent);
             }
         });
@@ -42,17 +42,17 @@ public class MainActivity extends ActionBarActivity {
         grades_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, GradesActivity.class);
+                Intent intent = new Intent(MainActivity.this, GradesActivity.class);
                 startActivity(intent);
             }
         });
 
         //2.1 Tests Button
-        final Button tests_button = (Button) findViewById(R.id.grades_button);
+        final Button tests_button = (Button) findViewById(R.id.tests_button);
         tests_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, TestsActivity.class);
+                Intent intent = new Intent(MainActivity.this, TestsActivity.class);
                 startActivity(intent);
             }
         });
@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
         schedule_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, ScheduleActivity.class);
+                Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
                 startActivity(intent);
             }
         });
@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
         library_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, LibraryActivity.class);
+                Intent intent = new Intent(MainActivity.this, LibraryActivity.class);
                 startActivity(intent);
             }
         });
@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
         contacts_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, ContactsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
         messages_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(this, MessagesActivity.class);
+                Intent intent = new Intent(MainActivity.this, MessagesActivity.class);
                 startActivity(intent);
             }
         });
@@ -130,4 +130,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
