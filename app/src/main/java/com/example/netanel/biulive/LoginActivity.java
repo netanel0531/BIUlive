@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
     Button bLogin;
@@ -41,20 +42,22 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         }
     }
     private void authenticate(User user) {
-        /*
+
         ServerRequests serverRequest = new ServerRequests(this);
         serverRequest.fetchUserDataAsyncTask(user, new GetUserCallback() {
             @Override
             public void done(User returnedUser) {
                 if (returnedUser == null) {
+                    Toast.makeText(LoginActivity.this, "not connected", Toast.LENGTH_SHORT).show();
                     showErrorMessage();
+                    Toast.makeText(LoginActivity.this, "not connected", Toast.LENGTH_SHORT).show();
                 } else {
                     logUserIn(returnedUser);
+                    Toast.makeText(LoginActivity.this, "connected", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        */
-        logUserIn(user);
+
     }
 
     private void showErrorMessage() {
