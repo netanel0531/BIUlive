@@ -48,12 +48,13 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             @Override
             public void done(User returnedUser) {
                 if (returnedUser == null) {
-                    Toast.makeText(LoginActivity.this, "not connected", Toast.LENGTH_SHORT).show();
+
                     showErrorMessage();
-                    Toast.makeText(LoginActivity.this, "not connected", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    logUserIn(returnedUser);
                     Toast.makeText(LoginActivity.this, "connected", Toast.LENGTH_SHORT).show();
+                    logUserIn(returnedUser);
+
                 }
             }
         });
