@@ -2,7 +2,7 @@ package com.example.netanel.biulive;
 
 public class User {
 
-    String name, username, password;
+    public String name, username, password;
     int age;
 
     public User(String username, String password) {

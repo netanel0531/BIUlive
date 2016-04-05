@@ -3,6 +3,7 @@ package com.example.netanel.biulive;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -11,11 +12,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 
 public class ServerRequests {
     ProgressDialog progressDialog;
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://tonikamitv.hostei.com/";
+
 
     public ServerRequests(Context context) {
         progressDialog = new ProgressDialog(context);
@@ -51,16 +55,16 @@ public class ServerRequests {
             dataToSend.add(new BasicNameValuePair("username", user.username));
             dataToSend.add(new BasicNameValuePair("password", user.password));
             */
-            String dataUrl = "https://dory.os.biu.ac.il/StudentSystem/StudentLoginPerformance.jsp";
-            String dataUrlParameters = "Id=30512016&IdType=1&pass=8452&Page=1&idNum=30512016&passportNum=";
+            String dataUrl =  "https://dory.os.biu.ac.il/mStudentSystem/ChooseFromMenu.jsp"; /* "https://dory.os.biu.ac.il/StudentSystem/StudentLoginPerformance.jsp"; */
+            String dataUrlParameters = "IdType=1&Id=30512016&pass=8452";/*"Id=30512016&IdType=1&pass=8452&Page=1&idNum=30512016&passportNum=";*/
             URL url;
-            HttpURLConnection connection = null;
+            HttpsURLConnection connection = null;
             User returnedUser = null;
             String responseStr = "null!";
             try {
 // Create connection
                 url = new URL(dataUrl);
-                connection = (HttpURLConnection) url.openConnection();
+                connection = (HttpsURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 connection.setRequestProperty("Content-Length","" + Integer.toString(dataUrlParameters.getBytes().length));
@@ -84,7 +88,7 @@ public class ServerRequests {
                 }
                 rd.close();
                 responseStr = response.toString();
-                if (responseStr.contains("FinalGradeFrame.jsp")) {
+                if (responseStr.contains("course-time-content-info-box")) {
                     returnedUser = new User(this.user);
                 }
             } catch (Exception e) {
