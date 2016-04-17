@@ -9,8 +9,6 @@ public class Course {
     private int courseGrade;
     View.OnClickListener listener;
 
-
-
     public Course(String courseName, String courseNumber,int courseGrade, View.OnClickListener listener){
         this.courseName = courseName;
         this.courseNumber = courseNumber;
