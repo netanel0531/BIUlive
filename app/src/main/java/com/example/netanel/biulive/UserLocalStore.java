@@ -7,7 +7,7 @@ public class UserLocalStore {
 
     public static final String SP_NAME = "userDetails";
 
-    SharedPreferences userLocalDatabase;
+    static SharedPreferences userLocalDatabase;
 
     public UserLocalStore(Context context) {
         userLocalDatabase = context.getSharedPreferences(SP_NAME, 0);
@@ -32,7 +32,7 @@ public class UserLocalStore {
         userLocalDatabaseEditor.commit();
     }
 
-    public User getLoggedInUser() {
+    public static User getLoggedInUser() {
         if (userLocalDatabase.getBoolean("loggedIn", false) == false) {
             return null;
         }

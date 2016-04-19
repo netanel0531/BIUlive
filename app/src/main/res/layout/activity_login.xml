@@ -20,14 +20,13 @@ tools:context="com.example.netanel.biulive.LoginActivity">
 
         <AutoCompleteTextView android:id="@+id/userId" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:hint="@string/userId"
-            android:inputType="textPassword" android:maxLines="1"
-            android:singleLine="true" />
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="number" />
 
         <EditText android:id="@+id/password" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:hint="@string/prompt_password"
-            android:imeActionId="@+id/login"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionUnspecified" android:inputType="textPassword"
+            android:layout_height="wrap_content" android:hint="@string/password"
+            android:inputType="textPassword"
             android:maxLines="1" android:singleLine="true" />
 
         <Button android:id="@+id/login_button" style="?android:textAppearanceSmall"
@@ -37,7 +36,8 @@ tools:context="com.example.netanel.biulive.LoginActivity">
     <TextView
         android:id="@+id/loginResp"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:linksClickable="true" />
     </LinearLayout>
 </ScrollView>
 
