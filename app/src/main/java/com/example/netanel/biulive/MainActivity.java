@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 public class MainActivity extends ActionBarActivity {
+    public static ArrayList<Course> courses = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

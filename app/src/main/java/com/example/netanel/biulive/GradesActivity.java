@@ -7,7 +7,13 @@ import android.widget.TextView;
 
 import com.loopj.android.http.*;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import cz.msebera.android.httpclient.Header;
+
 
 public class GradesActivity extends AppCompatActivity {
 
@@ -20,14 +26,24 @@ public class GradesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         textView = (TextView) findViewById(R.id.avgText);
-        ServerRequests.get("memutsaBeynaim.jsp",null, new AsyncHttpResponseHandler() {
+        ServerRequests.get("memutsaBeynaim.jsp", null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String res = new String(responseBody);
                 int i = res.indexOf("<b>ממוצע לתואר: </b>");
                 String s;
-                textView.append(res,i,i+40);
+                //textView.append(res);
                 //textView.conc(res.substring(i,i+40));
+
+                Document doc = Jsoup.parse(res);
+                Elements elms = doc.getElementsByTag("span");
+                textView.append("\n\n\n\n");
+                /*
+                for (Element elm : elms) {
+                    textView.append(elm.text());
+                }*/
+                textView.append("ממוצע הביניים הוא:");
+                textView.append(elms.get(1).text());
             }
 
             @Override
