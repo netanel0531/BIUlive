@@ -46,7 +46,7 @@ public class GradesFragment extends Fragment {
 
         /*set the list of the menu-title and image */
         List<Course> menuItem = new ArrayList<Course>() ;
-        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
+        menuItem.add(new Course("חהחהחה","33-52",100, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
@@ -119,7 +119,7 @@ public class GradesFragment extends Fragment {
                 startActivity(intent);
             }
         }));
-        CourseAdapter menuAdapter = new CourseAdapter((FragmentActivity) getActivity(), menuItem);
+        CourseAdapter menuAdapter = new CourseAdapter((FragmentActivity) getActivity(), MainActivity.courses);
         lstFriend.setAdapter(menuAdapter);
 
         return view;
@@ -148,4 +148,20 @@ public class GradesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    /*
+    public void addMenuItem() {
+        for (Course MainActivity.courses)
+        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                ft.add(R.id.gradeCompFragment , new GradeComponentsFragment());
+                ft.addToBackStack("menu");
+                ft.commit();
+            }
+        }));
+    }
+    */
 }

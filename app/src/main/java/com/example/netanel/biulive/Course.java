@@ -56,6 +56,10 @@ public class Course implements Serializable {
         this.courseEndHour = endHour;
     }
 
+    public void setCourseGrade(int courseGrade) {
+        this.courseGrade = courseGrade;
+    }
+
     public void setCourseSemester(String semester) {
         this.courseSemester = semester;
     }

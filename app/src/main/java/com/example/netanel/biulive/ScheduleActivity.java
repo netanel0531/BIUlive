@@ -1,26 +1,13 @@
 package com.example.netanel.biulive;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,12 +16,6 @@ import cz.msebera.android.httpclient.Header;
 
 public class ScheduleActivity extends AppCompatActivity {
     TextView textView;
-    TextView textViewSem;
-    TextView textViewDay;
-    TextView textViewStart;
-    TextView textViewEnd;
-    TextView textViewBuild;
-    TextView textViewClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +23,7 @@ public class ScheduleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_schedule);
         textView = (TextView) findViewById(R.id.schText);
         textView.append("\n\n\n\n");
-        /*
-        textViewSem = (TextView) findViewById(R.id.schText);
-        textViewSem.append("\n");
-        textViewDay = (TextView) findViewById(R.id.schText);
-        textViewDay.append("\n");
-        textViewStart = (TextView) findViewById(R.id.schText);
-        textViewStart.append("\n");
-        textViewEnd = (TextView) findViewById(R.id.schText);
-        textViewEnd.append("\n");
-        textViewBuild = (TextView) findViewById(R.id.schText);
-        textViewBuild.append("\n");
-        textViewClass = (TextView) findViewById(R.id.schText);
-        textViewClass.append("\n");
-        */
+
         final RequestParams params = new RequestParams();
         params.put("yearValue", "%FA%F9%F2%22%E5");
         params.put("yearSelected", "40");
@@ -70,41 +38,26 @@ public class ScheduleActivity extends AppCompatActivity {
                 String current = "";
                 while (matcher.find()) {
                     current = matcher.group();
-
-
                     listMatches.add(current);
-                    /*
-                    if (!listMatches.contains(current)) {
-
-                    }*/
                 }
-
+                ArrayList<String> c = new ArrayList<String>();
+                for (Course course: MainActivity.courses) {
+                    c.add(course.getCourseNumber());
+                }
                 for (String s : listMatches) {
-                    MainActivity.courses.add(new Course(s));
-//                    textView.append(s + "\n");
+//                    String sub = s.split("-")[0] + s.split("-")[1];
+                    if (!c.contains(s)) {
+                        c.add(s);
+                        MainActivity.courses.add(new Course(s));
+                    }
                 }
-//                textView.append(Integer.toString(MainActivity.courses.size()) + "\n");
 
                 for (final Course course : MainActivity.courses) {
 
                     final String[] parts = course.getCourseNumber().split("-");
-                    /*
-                    HashMap<String, String> paramMap = new HashMap<>();
-                    paramMap.put("year", "%FA%F9%F2%22%E5");
-                    paramMap.put("CourseId1", parts[0]);
-                    paramMap.put("CourseId2", parts[1]);
-                    paramMap.put("CourseGrup", parts[2]);
-                    paramMap.put("sum", "");
-                    */
+
                     RequestParams courseTimeParams = new RequestParams();
 
-                    //textView.append(parts[0]+","+parts[1]+","+parts[2]+"\n");
-//                    String a = String.format("%FA%F9%F2%22%E5", Uri.encode())
-/*                    courseTimeParams.put("year", "%FA%F9%F2%22%E5");
-                    courseTimeParams.put("CourseId1", parts[0]);
-                    courseTimeParams.put("CourseId2", parts[1]);
-                    courseTimeParams.put("CourseGrup", parts[2]);
-                    courseTimeParams.put("sum", ""); */
                     String url = "CourseInfo.jsp?year=%FA%F9%F2%22%E5";
                     url += "&CourseId1=" + parts[0];
                     url += "&CourseId2=" + parts[1];
@@ -115,15 +68,6 @@ public class ScheduleActivity extends AppCompatActivity {
                     public void onSuccess ( int statusCode, Header[] headers,byte[] responseBody){
                         String res = new String(responseBody);
 
-                        /*
-                        int semeterIndex = res.indexOf("<td align=center>") + 18;
-                        int dayIndex = res.indexOf("<td align=center>", semeterIndex + 1) + 18;
-                        int hoursIndex = res.indexOf("<td align=center>", dayIndex + 1) + 18;
-                        int buildingIndex = res.indexOf("<td align=center>", hoursIndex + 1) + 18;
-                        int builidngEndIndex = res.indexOf("</td>", buildingIndex);
-                        int classroomIndex = res.indexOf("<td align=center>", buildingIndex + 1) + 18;
-                        int classroomEndIndex = res.indexOf("</td>", classroomIndex);
-                        */
                         String response = res.replaceAll("\\s","");
                         int len = "<tdalign=center>".length();
                         int semeterIndex = response.indexOf("<tdalign=center>")+len;
@@ -160,31 +104,6 @@ public class ScheduleActivity extends AppCompatActivity {
                     }
                 });
             }
-
-/*
-                for (final Course course : MainActivity.courses) {
-                    textViewSem.append(course.getCourseSemester());
-                    textViewDay.append(course.getCourseDay());
-                    textViewStart.append(course.getCourseStartHour());
-                    textViewEnd.append(course.getCourseEndHour());
-                    textViewBuild.append(course.getCourseBuilding());
-                    textViewClass.append(course.getCourseClass());
-                }
-                */
-
-
-
-
-                /*
-                Document doc = Jsoup.parse(res);
-
-                Elements tables = doc.getElementsByTag("table");
-                Element semesterATable = tables.get(0);
-                Elements semesterABody = semesterATable.getElementsByAttribute("tbody");
-
-                Element semesterB = tables.get(1);
-                */
-
         }
 
         @Override
