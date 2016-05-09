@@ -37,7 +37,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     }
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
+      /*  switch (view.getId()) {
             case R.id.login_button:
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
@@ -55,7 +55,15 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 //authenticate(user);
 
                 break;
-        }
+        }*/
+        ServerRequests.setAut("30512016","8452");
+
+        PersistentCookieStore myCookieStore = new PersistentCookieStore(this);
+// clear cookie to make the fresh cookie, to ensure the newest cookie is being send
+        myCookieStore.clear();
+// set the new cookie
+        ServerRequests.client.setCookieStore(myCookieStore);
+        authenticate();
     }
     private void authenticate() {
         HashMap<String, String> paramMap = new HashMap<>();
