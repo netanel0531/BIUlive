@@ -3,6 +3,7 @@ package com.example.netanel.biulive;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -13,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.util.EncodingUtils;
 
 public class ScheduleActivity extends AppCompatActivity {
     TextView textView;
@@ -30,7 +32,7 @@ public class ScheduleActivity extends AppCompatActivity {
         ServerRequests.get("HourScheduale.jsp", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String res = new String(responseBody);
+                String res = EncodingUtils.getString(responseBody, "iso-8859-8");
 
                 Pattern pattern = Pattern.compile("\\d\\d\\-\\d\\d\\d\\-\\d\\d");
                 Matcher matcher = pattern.matcher(res);
@@ -45,7 +47,6 @@ public class ScheduleActivity extends AppCompatActivity {
                     c.add(course.getCourseNumber());
                 }
                 for (String s : listMatches) {
-//                    String sub = s.split("-")[0] + s.split("-")[1];
                     if (!c.contains(s)) {
                         c.add(s);
                         MainActivity.courses.add(new Course(s));
@@ -66,8 +67,8 @@ public class ScheduleActivity extends AppCompatActivity {
                     ServerRequests.post(url, /*courseTimeParams*/null, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess ( int statusCode, Header[] headers,byte[] responseBody){
-                        String res = new String(responseBody);
-
+                        String res = EncodingUtils.getString(responseBody, "iso-8859-8");
+//                        String res = new String(responseBody);
                         String response = res.replaceAll("\\s","");
                         int len = "<tdalign=center>".length();
                         int semeterIndex = response.indexOf("<tdalign=center>")+len;

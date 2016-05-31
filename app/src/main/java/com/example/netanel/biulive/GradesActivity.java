@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.mime.content.StringBody;
+import cz.msebera.android.httpclient.util.EncodingUtils;
 
 public class GradesActivity extends AppCompatActivity {
 
@@ -86,13 +87,9 @@ public class GradesActivity extends AppCompatActivity {
         ServerRequests.post("FinalGradeInfo.jsp", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String res = new String(responseBody);
+                String res = EncodingUtils.getString(responseBody, "iso-8859-8");
                 res = res.replaceAll("\\s","");
-                /*
-                if (res.contains("<pdir=rtlalign=right>")) {
-                    return;
-                }
-                */
+
                 Pattern pattern = Pattern.compile("\\d\\d\\d\\d\\/\\d\\d\\/\\d\\d");
                 Matcher matcher = pattern.matcher(res);
                 List<String> listMatches = new ArrayList<String>();
@@ -117,8 +114,6 @@ public class GradesActivity extends AppCompatActivity {
                 if (grade.length() > 1) {
                     course.setCourseGrade(Integer.parseInt(grade));
                 }
-                //textView.append(grade+"\n");
-
             }
 
 
@@ -128,6 +123,7 @@ public class GradesActivity extends AppCompatActivity {
             }
         });
     }
+
     /*
     get the grade components of a course,
     (adding the grade to the course?)
@@ -152,6 +148,7 @@ public class GradesActivity extends AppCompatActivity {
                 String text;
                 for (i = 2; i < tasks.length-1; i++) {
                     text = tasks[i];
+
                     //get Matala
                     int firstTd = text.indexOf("<td");
                     while (text.charAt(firstTd)!='>') {
@@ -163,7 +160,6 @@ public class GradesActivity extends AppCompatActivity {
                         matala += text.substring(firstTd, firstTd + 1);
                         firstTd++;
                     }
-                    System.out.println("MATALA: " + matala);
 
                     //the percentage info
                     precTd = text.indexOf("<tddir", firstTd);
@@ -173,7 +169,7 @@ public class GradesActivity extends AppCompatActivity {
                         prec += text.substring(precTd, precTd+1);
                         precTd++;
                     }
-                    System.out.println("Prec: " + prec);
+
                     //the Moed info
                     firstTd = text.indexOf("<td>", precTd);
                     firstTd += "<td>".length();
@@ -182,7 +178,6 @@ public class GradesActivity extends AppCompatActivity {
                         moed += text.substring(firstTd, firstTd+1);
                         firstTd++;
                     }
-                    System.out.println("Moed: " + moed);
 
                     //the Grade info
                     precTd = text.indexOf("<TDalign", firstTd);
@@ -192,7 +187,6 @@ public class GradesActivity extends AppCompatActivity {
                         grade += text.substring(precTd, precTd+1);
                         precTd++;
                     }
-                    System.out.println("Grade: " + grade);
 
                     //the Date info
                     precTd = text.indexOf("<TDalign", precTd);
@@ -202,9 +196,7 @@ public class GradesActivity extends AppCompatActivity {
                         data += text.substring(precTd, precTd+1);
                         precTd++;
                     }
-                    System.out.println("Date: " + data);
                 }
-
             }
 
             @Override
