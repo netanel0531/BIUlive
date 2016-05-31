@@ -19,7 +19,8 @@ public class Course implements Serializable {
     private String courseEndHour = null;
     private String courseDay = null;
     private String courseSemester = null;
-    private List<Test> tests = new ArrayList<>(2);
+    private List<Test> tests = new ArrayList<>();
+
     View.OnClickListener listener;
 
     public Course(String courseName, String courseNumber,int courseGrade, View.OnClickListener listener){
@@ -35,15 +36,23 @@ public class Course implements Serializable {
 
     }
 
-
     public Course(String courseNumber){
         this.courseNumber = courseNumber;
-        this.tests.set(0, null);
-        this.tests.set(1, null);
     }
 
+    public Course(String courseName, String courseNumber,String courseDay,String courseStartHour, View.OnClickListener listener){
+        this.courseName = courseName;
+        this.courseNumber = courseNumber;
+        this.courseDay = courseDay;
+        this.courseStartHour = courseStartHour;
+        this.listener = listener;
+    }
     public View.OnClickListener getListener() {
-        return listener;
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        };
     }
     public void setMoedA(String testDay,String testHour,String moed) {
         this.tests.set(0, new Test(testDay, testHour, moed));
@@ -51,9 +60,6 @@ public class Course implements Serializable {
     public void setMoedB(String testDay,String testHour,String moed) {
         this.tests.set(1, new Test(testDay, testHour, moed));
     }
-
-
-
     public Test getMoedA() {
         return this.tests.get(0);
     }
@@ -67,11 +73,14 @@ public class Course implements Serializable {
     }
 
     public String getCourseName() {
-        return courseName;
+        return "אלגברה לינארית";
     }
 
     public String getCourseGrade() {
-        return Integer.toString(this.courseGrade);
+        return Integer.toString(courseGrade);
+    }
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
     public void setCourseBuilding(String building) {
         this.courseBuilding = building;
@@ -86,43 +95,34 @@ public class Course implements Serializable {
         this.courseEndHour = endHour;
     }
 
-    public void setCourseGrade(int courseGrade) {
-        this.courseGrade = courseGrade;
-    }
-
     public void setCourseSemester(String semester) {
         this.courseSemester = semester;
     }
-    public void setCourseDay(String courseDay) {
-        this.courseDay = courseDay;
+    public void setCourseDay(String courseDay) { this.courseDay = courseDay;   }
+    public void setCourseGrade(int courseGrade) {
+        this.courseGrade = courseGrade;
     }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
     public String getCourseBuilding() {
-        return this.courseBuilding;
+        return courseBuilding;
     }
 
     public String getCourseClass() {
-        return this.courseClass;
+        return courseClass;
     }
 
     public String getCourseStartHour() {
-        return this.courseStartHour;
+        return courseStartHour;
     }
 
     public String getCourseEndHour() {
-        return this.courseEndHour;
+        return courseEndHour;
     }
 
     public String getCourseDay() {
-        return this.courseDay;
+        return courseDay;
     }
 
     public String getCourseSemester() {
-        return this.courseSemester;
+        return courseSemester;
     }
-
 }
