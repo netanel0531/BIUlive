@@ -70,9 +70,11 @@ public class TestsActivity extends AppCompatActivity {
                     tableStart = res.indexOf(tableStartSign, tableStart+1);
                 }
                 String rawStart = "<tr>";
-                String cellStart = "<tdalign=\"center\">";
+                String cellStart = "<tdalign=center>";
                 String cellEnd = "</td>";
-                String tableEnd = "<strong>";
+                String tableEnd = "</table>";
+                String passed = "<fontcolor=\"D18700\">";
+
 
 
                 int tableEndIndex = res.indexOf(tableEnd, tableStart + 1);
@@ -88,11 +90,13 @@ public class TestsActivity extends AppCompatActivity {
 
                     //first cell
                     curInfoStart = res.indexOf(cellStart, nextRaw) + cellStart.length();
+                    /*
                     //check if first cell as a semester info
                     if (res.charAt(curInfoStart) != '&') {
                         semester = "" + res.charAt(curInfoStart);
                     }
                     System.out.println("Semester: " + semester);
+                    */
 
                     //course number cell
                     nextCell = res.indexOf(cellStart, curInfoStart);
@@ -122,6 +126,9 @@ public class TestsActivity extends AppCompatActivity {
                     nextCell = res.indexOf(cellStart, curInfoStart);
                     curInfoStart = res.indexOf(cellStart, nextCell) + cellStart.length();
                     curInfoEnd = res.indexOf(cellEnd, nextCell);
+                    if (res.charAt(curInfoStart) == '<') {
+                        curInfoStart += passed.length();
+                    }
                     moedADate = res.substring(curInfoStart, curInfoEnd);
                     System.out.println("moed A date: " + res.substring(curInfoStart, curInfoEnd));
 
@@ -130,6 +137,9 @@ public class TestsActivity extends AppCompatActivity {
                     nextCell = res.indexOf(cellStart, curInfoStart);
                     curInfoStart = res.indexOf(cellStart, curInfoEnd) + cellStart.length();
                     curInfoEnd = res.indexOf(cellEnd, curInfoStart);
+                    if (res.charAt(curInfoStart) == '<') {
+                        curInfoStart += passed.length();
+                    }
                     moedATime = res.substring(curInfoStart, curInfoEnd);
                     System.out.println("moed A hour: " + res.substring(curInfoStart, curInfoEnd));
 
@@ -139,6 +149,9 @@ public class TestsActivity extends AppCompatActivity {
                     nextCell = res.indexOf(cellStart, curInfoStart);
                     curInfoStart = res.indexOf(cellStart, curInfoEnd) + cellStart.length();
                     curInfoEnd = res.indexOf(cellEnd, curInfoStart);
+                    if (res.charAt(curInfoStart) == '<') {
+                        curInfoStart += passed.length();
+                    }
                     moedBDate = res.substring(curInfoStart, curInfoEnd);
                     System.out.println("moed B date: " + res.substring(curInfoStart, curInfoEnd));
 
@@ -147,6 +160,9 @@ public class TestsActivity extends AppCompatActivity {
                     nextCell = res.indexOf(cellStart, curInfoStart);
                     curInfoStart = res.indexOf(cellStart, curInfoEnd) + cellStart.length();
                     curInfoEnd = res.indexOf(cellEnd, curInfoStart);
+                    if (res.charAt(curInfoStart) == '<') {
+                        curInfoStart += passed.length();
+                    }
                     moedBTime = res.substring(curInfoStart, curInfoEnd);
                     System.out.println("moed B hour: " + res.substring(curInfoStart, curInfoEnd));
 
@@ -157,11 +173,12 @@ public class TestsActivity extends AppCompatActivity {
                     } else {
                         nextRaw = tableEndIndex + 1;
                     }
+
                     for (Course course: MainActivity.courses) {
                         if (course.getCourseNumber() == courseNum) {
                             course.setCourseName(courseName);
                             course.setMoedA(moedADate, moedATime, "א");
-                            course.setMoedA(moedBDate, moedBTime, "ב");
+                            course.setMoedB(moedBDate, moedBTime, "ב");
                             break;
                         }
                     }
