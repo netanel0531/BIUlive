@@ -10,7 +10,7 @@ import java.util.List;
 public class Course implements Serializable {
     final String MOED_A = "א";
     final String MOED_B = "ב";
-    private String courseName = null;
+    private String courseName = "";
     private String courseNumber = null;
     private int courseGrade = -1;
     private String courseBuilding = null;
@@ -20,8 +20,7 @@ public class Course implements Serializable {
     private String courseDay = null;
     private String courseSemester = null;
     private List<Test> tests = new ArrayList<>(2);
-
-
+    private List<GradeComponent> gradeComponents = new ArrayList<GradeComponent>();
     View.OnClickListener listener;
 
     public Course(String courseName, String courseNumber,int courseGrade, View.OnClickListener listener){
@@ -81,7 +80,7 @@ public class Course implements Serializable {
     }
 
     public String getCourseName() {
-        return "אלגברה לינארית";
+        return this.courseName;
     }
 
     public String getCourseGrade() {
@@ -132,5 +131,9 @@ public class Course implements Serializable {
 
     public String getCourseSemester() {
         return courseSemester;
+    }
+
+    public List<GradeComponent> getGradeComponents() {
+        return gradeComponents;
     }
 }

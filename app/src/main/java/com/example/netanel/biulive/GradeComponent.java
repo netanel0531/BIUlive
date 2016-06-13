@@ -3,14 +3,14 @@ package com.example.netanel.biulive;
 /**
  * Created by DELL on 24/04/2016.
  */
-public class GradeComp {
+public class GradeComponent {
     private String type = "";
     private String grade = "";
     private String moed = "";
     private String precents = "";
     private String date = "";
 
-    public GradeComp(){
+    public GradeComponent(){
     }
 
 
