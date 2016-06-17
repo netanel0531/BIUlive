@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.netanel.biulive" >
+    package="com.example.netanel.biulive">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -18,10 +18,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light" >
+        android:theme="@style/Theme.AppCompat.Light">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,28 +31,22 @@
         <activity android:name=".PersonalActivity" />
         <activity
             android:name=".GradesActivity"
-            android:label="@string/title_activity_grades"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_grades" />
         <activity
             android:name=".TestsActivity"
-            android:label="@string/title_activity_tests"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_tests" />
         <activity
             android:name=".ScheduleActivity"
-            android:label="@string/title_activity_schedule"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_schedule" />
         <activity
             android:name=".LibraryActivity"
-            android:label="@string/title_activity_library"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_library" />
         <activity
             android:name=".ContactsActivity"
-            android:label="@string/title_activity_contacts"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_contacts" />
         <activity
             android:name=".MessagesActivity"
-            android:label="@string/title_activity_messages"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_messages" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -70,12 +64,11 @@
             android:label="@string/title_activity_map" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".MenuActivity"
-            android:label="@string/title_activity_menu" >
-        </activity>
+            android:label="@string/title_activity_menu"></activity>
+        <activity android:name=".GradeComponentsActivity"></activity>
     </application>
 
 </manifest>

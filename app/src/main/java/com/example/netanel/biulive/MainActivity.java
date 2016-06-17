@@ -5,19 +5,26 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class MainActivity extends ActionBarActivity {
     public static ArrayList<Course> courses = new ArrayList<>();
-
+    public static UserLocalStore userLocalStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(i);
+        userLocalStore = new UserLocalStore(this);
+/*
+        if (userLocalStore.getLoggedInUser() == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        } else {
 
+            courses.addAll(userLocalStore.getUserData());
+            startActivity(new Intent(MainActivity.this, MenuActivity.class));
+        }
+*/
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
 }

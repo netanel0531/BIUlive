@@ -1,27 +1,33 @@
 package com.example.netanel.biulive;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.*;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.PersistentCookieStore;
+import com.loopj.android.http.RequestParams;
 
 import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
-public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     Button bLogin;
     TextView registerLink;
     EditText etUsername, etPassword;
+    ProgressBar pb;
     TextView t;
-    UserLocalStore userLocalStore;
+
+    Integer i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +36,11 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         bLogin = (Button) findViewById(R.id.login_button);
         etUsername = (EditText) findViewById(R.id.userId);
         etPassword = (EditText) findViewById(R.id.password);
+        pb = (ProgressBar) findViewById(R.id.progressBar);
         t = (TextView) findViewById(R.id.loginResp);
-        userLocalStore = new UserLocalStore(this);
+
         bLogin.setOnClickListener(this);
+
 
     }
     @Override
@@ -42,7 +50,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                ServerRequests.setAut("30512016","8452");
+                ServerRequests.setAut(username,password);
 
                 PersistentCookieStore myCookieStore = new PersistentCookieStore(this);
 // clear cookie to make the fresh cookie, to ensure the newest cookie is being send
@@ -56,14 +64,16 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
                 break;
         }*/
-        ServerRequests.setAut("30512016","8452");
 
+        ServerRequests.setAut("30512016","8452");
         PersistentCookieStore myCookieStore = new PersistentCookieStore(this);
 // clear cookie to make the fresh cookie, to ensure the newest cookie is being send
         myCookieStore.clear();
 // set the new cookie
         ServerRequests.client.setCookieStore(myCookieStore);
         authenticate();
+   //     startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+
     }
     private void authenticate() {
         HashMap<String, String> paramMap = new HashMap<>();
@@ -76,12 +86,47 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         paramMap.put("passportNum","");
         RequestParams params = new RequestParams(paramMap);
         ServerRequests.client.setEnableRedirects(true,true,true);
+
         ServerRequests.post("StudentLoginPerformance.jsp", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String res = new String(responseBody);
-                if (res.contains("FinalGradeInput.jsp"))
-                    startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                if (res.contains("FinalGradeInput.jsp")) {
+                    DataManager.loadAll();
+                    final ProgressDialog progress;
+                    progress=new ProgressDialog(LoginActivity.this);
+                    progress.setMessage("מתחבר ...");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setIndeterminate(true);
+
+                    progress.setProgress(0);
+                    progress.show();
+                    Thread tLoader = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                while (i <= 100) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //set text to be - 5 4 3 2 1
+                                            progress.setProgress(i);
+                                        }
+                                    });
+                                    Thread.sleep(200); //sleep
+                                    i++;
+                                }
+                                //move to the map activity
+                                logUserIn(new User("305120164","8452"));
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
+                    });
+                    tLoader.start();
+                }
                 else
                     Toast.makeText(LoginActivity.this,res.concat("HI"),Toast.LENGTH_LONG).show();
             }
@@ -90,7 +135,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 if (responseBody == null) {
-                    Toast.makeText(LoginActivity.this, String.valueOf(statusCode).concat("ERROr"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, String.valueOf(statusCode).concat("ERROR"), Toast.LENGTH_LONG).show();
                 }
                 else {
 
@@ -106,6 +151,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             }
         });
 
+
     }
 
     private void showErrorMessage() {
@@ -117,8 +163,9 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
     private void logUserIn(User returnedUser) {
 
-        userLocalStore.storeUserData(returnedUser);
-        userLocalStore.setUserLoggedIn(true);
-        startActivity(new Intent(this, MenuActivity.class));
+        MainActivity.userLocalStore.storeUserAuth(returnedUser);
+        MainActivity.userLocalStore.setUserLoggedIn(true);
+        MainActivity.userLocalStore.storeUserData(MainActivity.courses);
+        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
     }
 }

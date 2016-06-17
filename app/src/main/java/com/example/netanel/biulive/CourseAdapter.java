@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by dell on 17/04/2016.
- */
 public class CourseAdapter extends BaseAdapter {
     private FragmentActivity activity;
     private LayoutInflater inflater;
@@ -51,16 +48,54 @@ public class CourseAdapter extends BaseAdapter {
         TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
         TextView txtGrade = (TextView) convertView.findViewById(R.id.grade);
         TextView txtNumber = (TextView) convertView.findViewById(R.id.courseNum);
-        RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.course_item);
+        LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.course_item);
 
-        Course item = items.get(position);
+        final Course item = items.get(position);
         //set view with the current item
 
         txtGrade.setText(item.getCourseGrade());
         txtTitle.setText(item.getCourseName());
         txtNumber.setText(item.getCourseNumber());
-        layout.setOnClickListener(item.getListener());
 
+/*
+        item.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = new GradeComponentsFragment().getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.add(R.id.gradeCompFragment,
+                        GradeComponentsFragment.newInstance(item.getCourseNumber(), ""));
+                ft.addToBackStack("menu");
+                ft.commit();
+            }
+        });
+*/
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                FragmentManager fm = (new GradesFragment()).getChildFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.add(R.id.gradeCompFragment,
+                        GradeComponentsFragment.newInstance(item.getCourseNumber(), ""));
+                ft.addToBackStack("menu");
+                //ft.commit();
+                */
+
+             //   activity.startActivity(new Intent(activity, MenuActivity.class));
+                /*
+                Intent intent = new Intent(new Intent(activity, GradeComponentsActivity.class));
+                Bundle b = new Bundle();
+                b.putString("courseNumber", item.getCourseNumber()); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                activity.startActivity(intent);
+                activity.finish();
+                */
+                GradeComponentsFragment dFragment = new GradeComponentsFragment();
+                // Show DialogFragment
+                dFragment.show(activity.getSupportFragmentManager(), "Dialog Fragment");
+            }
+        });
         return convertView;
     }
 

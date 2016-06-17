@@ -11,6 +11,7 @@ public class ServerRequests {
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
+
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

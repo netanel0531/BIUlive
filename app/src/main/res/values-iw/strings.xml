@@ -16,5 +16,8 @@
     <string name="password">סיסמא</string>
     <string name="action_login_button">התחבר</string>
     <string name="Your_average">הממוצע שלך:</string>
-
+    <string name="courseName">שם הקורס:</string>
+    <string name="courseNumber">מספר הקורס:</string>
+    <string name="courseDay">יום הקורס:</string>
+    <string name="courseHours">שעות הקורס:</string>
 </resources>

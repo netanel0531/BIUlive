@@ -5,12 +5,19 @@
     tools:context=".GradeComponentsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:background="@color/background_floating_material_dark"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+    <FrameLayout
+        android:layout_width="260dp"
+        android:layout_height="282dp"
+        android:id="@+id/gradeCompFragment_toActivity"
+        android:layout_gravity="center"
+        android:background="#f3f29538"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lstGradeComp"
+        android:layout_gravity="center" />
 
+    </FrameLayout>
 </FrameLayout>

@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.netanel.biulive.TestsActivity">
+    tools:context="com.example.netanel.biulive.TestsActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+
+    <Switch
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:text="למעבר תצוגה"
+        android:id="@+id/switch1"
+        android:layout_gravity="right"
+        android:layout_weight="0.10"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>
-    
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
-
-    <RelativeLayout
-        android:id="@+id/testsData"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:id="@+id/testFragment"
+        android:orientation="vertical"
+        android:layout_width="325dp"
+        android:layout_height="497dp"
+        android:layout_gravity="center"
+        android:background="@drawable/abc_popup_background_mtrl_mult">
+    </LinearLayout>
+</LinearLayout>

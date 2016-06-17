@@ -1,12 +1,9 @@
 package com.example.netanel.biulive;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +29,6 @@ public class GradesFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +40,8 @@ public class GradesFragment extends Fragment {
 
         /*set the list of the menu-title and image */
         List<Course> menuItem = new ArrayList<Course>() ;
+  //      DataManager.retrieveCourseFinalGrade();
+        /*
         menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,76 +53,31 @@ public class GradesFragment extends Fragment {
                 ft.commit();
             }
         }));
-        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
+*/
+        for (final Course course: MainActivity.courses) {
+            course.setListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
 
-                ft.add(R.id.gradeCompFragment , new GradeComponentsFragment());
-                ft.addToBackStack("menu");
-                ft.commit();
-            }
-        }));
-        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
+                    ft.add(R.id.gradeCompFragment,
+                            GradeComponentsFragment.newInstance(course.getCourseNumber(),""));
+                    ft.addToBackStack("menu");
+                    ft.commit();
+                    */
+                    //startActivity(new Intent(getActivity(), MenuActivity.class));
+                }
+            });
+        }
 
-                ft.add(R.id.gradeCompFragment , new GradeComponentsFragment());
-                ft.addToBackStack("menu");
-                ft.commit();
-            }
-        }));
-        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                ft.add(R.id.gradeCompFragment , new GradeComponentsFragment());
-                ft.addToBackStack("menu");
-                ft.commit();
-            }
-        }));
-        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                ft.add(R.id.gradeCompFragment , new GradeComponentsFragment());
-                ft.addToBackStack("menu");
-                ft.commit();
-            }
-        }));
-        menuItem.add(new Course("חשבון","33-55",100, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                ft.add(R.id.gradeCompFragment , new GradeComponentsFragment());
-                ft.addToBackStack("menu");
-                ft.commit();
-            }
-        }));
-        menuItem.add(new Course("אנגלית","33-55",100, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        }));
+        menuItem.addAll(MainActivity.courses);
         CourseAdapter menuAdapter = new CourseAdapter((FragmentActivity) getActivity(), menuItem);
         lstFriend.setAdapter(menuAdapter);
 
         return view;
     }
-
-
-
 
     @Override
     public void onDetach() {

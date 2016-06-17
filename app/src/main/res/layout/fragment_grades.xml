@@ -6,12 +6,10 @@
 
 
     <ListView
-        android:divider="#e3db3a3a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/lstCourse"
         android:layout_gravity="left|center_vertical"
-        android:dividerHeight="2dp"
         android:backgroundTint="#f6d4d4"
         android:scrollbars="vertical"/>
 
@@ -19,6 +17,8 @@
         android:layout_width="260dp"
         android:layout_height="282dp"
         android:id="@+id/gradeCompFragment"
-        android:layout_gravity="center"></FrameLayout>
+        android:layout_gravity="center"
+        android:background="#f3f29538"
+        android:visibility="invisible"></FrameLayout>
 
 </FrameLayout>

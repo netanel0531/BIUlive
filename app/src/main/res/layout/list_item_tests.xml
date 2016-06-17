@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="71dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="12:00"
+            android:id="@+id/examHour"
+            android:layout_toLeftOf="@+id/examDay"
+            android:layout_toStartOf="@+id/examDay"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/data_frame"/>
+
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="21\3\12"
+            android:id="@+id/examDay"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/examMoed"
+            android:layout_toStartOf="@+id/examMoed"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/data_frame"/>
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="א"
+            android:id="@+id/examMoed"
+            android:layout_alignParentTop="false"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/data_frame" />
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/examCourseName"
+            android:layout_toRightOf="@+id/examMoed"
+            android:layout_toEndOf="@+id/examMoed"
+            android:background="@drawable/data_frame">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="אוטומטים ושפות פורמליות"
+                    android:id="@+id/examCourseName"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="89-404-03"
+                android:id="@+id/examCourseNumber"
+                android:layout_alignParentTop="false"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_below="@+id/examCourseName"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/examCourseNumber"
+                android:layout_alignParentStart="false" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
